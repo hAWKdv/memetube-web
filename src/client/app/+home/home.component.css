@@ -1,13 +1,51 @@
-:host {
-  display: block;
-  padding: 0 16px;
+header {
+  position: fixed;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 25px;
+  height: 75px;
+  top: 0;
 }
 
-input {
-  width: 250px;
+.logo {
+  background: white;
+  width: 75px;
+  height: 35px;
+  float: left;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0 0 0 8px;
+.menu {
+  float: right;
+}
+
+.login-btn, .upload-btn, .logout-btn {
+  margin-left: 15px;
+  width: 35px;
+  height: 35px;
+  float: left;
+}
+
+.login-btn {
+  background: yellow;
+}
+
+.upload-btn {
+  background: blue;
+}
+
+section {
+  position: absolute;
+  border: 1px solid white;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 0;
+  top: 75px;
+  width: 900px;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+section::-webkit-scrollbar {
+  display: none;
 }
