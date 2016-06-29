@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Meme } from '../../../store/meme';
 
 @Component({
   selector: 'mt-meme',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './meme.component.html',
   styleUrls: ['./meme.component.css']
 })
-export class MemeComponent {}
+export class MemeComponent {
+  @Input() meme: Meme;
+}

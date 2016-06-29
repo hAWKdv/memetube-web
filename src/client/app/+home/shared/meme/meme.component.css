@@ -1,0 +1,31 @@
+.master {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  width: 600px;
+  float: left;
+}
+
+.voting {
+  width: 30px;
+  margin-left: 25px;
+  float: left;
+
+}
+
+.voting > div {
+  width: 20px;
+  height: 30px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.up {
+  background: green;
+}
+
+.down {
+  background: red;
+}
