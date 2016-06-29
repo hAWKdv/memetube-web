@@ -1,6 +1,6 @@
 header {
   position: fixed;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   width: 100%;
   padding: 20px 25px;
@@ -9,7 +9,7 @@ header {
 }
 
 .logo {
-  background: white;
+  background: black;
   width: 75px;
   height: 35px;
   float: left;
@@ -19,24 +19,32 @@ header {
   float: right;
 }
 
-.login-btn, .upload-btn, .logout-btn {
+.categories {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  width: 900px;
+}
+
+.btn {
+  position: relative;
   margin-left: 15px;
   width: 35px;
   height: 35px;
   float: left;
 }
 
-.login-btn {
-  background: yellow;
+.login.btn {
+  background: red;
 }
 
-.upload-btn {
+.upload.btn {
   background: blue;
 }
 
 section {
   position: absolute;
-  border: 1px solid white;
+  border: 1px solid black;
   transform: translateX(-50%);
   left: 50%;
   bottom: 0;
@@ -48,4 +56,11 @@ section {
 
 section::-webkit-scrollbar {
   display: none;
+}
+
+mt-auth-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 40px 0 0 -270px;
 }
