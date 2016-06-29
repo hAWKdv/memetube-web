@@ -3,7 +3,7 @@ import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import * as Immutable from 'immutable';
 
 @Component({
-  selector: 'sd-home',
+  selector: 'mt-home',
   moduleId: module.id,
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
