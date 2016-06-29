@@ -9,4 +9,12 @@ import { Meme } from '../../../store/meme';
 })
 export class MemeComponent {
   @Input() meme: Meme;
+
+  public upvote(): void {
+    console.log('upvote');
+  }
+
+  public downvote(): void {
+    console.log('downvote');
+  }
 }

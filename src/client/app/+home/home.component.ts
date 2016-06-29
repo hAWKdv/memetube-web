@@ -20,6 +20,7 @@ import { UploaderComponent } from './shared/uploader/index';
 })
 export class HomeComponent implements OnInit {
   public showAuthForm: boolean;
+  public showUploader: boolean;
 
   constructor(private _route: ActivatedRoute) {}
 
@@ -30,7 +31,12 @@ export class HomeComponent implements OnInit {
   }
 
   public toggleAuthForm(): void {
-    console.log('toogle');
+    this.showUploader = false;
     this.showAuthForm = !this.showAuthForm;
+  }
+
+  public toggleUploader(): void {
+    this.showAuthForm = false;
+    this.showUploader = !this.showUploader;
   }
 }

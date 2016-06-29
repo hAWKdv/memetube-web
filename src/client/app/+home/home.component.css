@@ -60,7 +60,7 @@ section::-webkit-scrollbar {
   display: none;
 }
 
-mt-auth-form {
+mt-auth-form, mt-uploader {
   position: absolute;
   top: 0;
   right: 0;
