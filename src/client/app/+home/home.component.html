@@ -6,12 +6,10 @@
     <a href="">Cat 3</a>
   </div>
   <div class="menu">
-    <div class="upload btn">
-      <mt-uploader></mt-uploader>
-    </div>
-    <div class="login btn">
-      <mt-auth-form></mt-auth-form>
-    </div>
+    <div class="upload btn"></div>
+    <div (click)="toggleAuthForm()" class="login btn"></div>
+    <mt-uploader></mt-uploader>
+    <mt-auth-form [class.show]="showAuthForm" ></mt-auth-form>
   </div>
 </header>
 <section>

@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.css']
 })
-export class AuthFormComponent {}
+export class AuthFormComponent {
+  public isLogin: boolean = true;
+
+  public switchForms(): void {
+    this.isLogin = !this.isLogin;
+  }
+}

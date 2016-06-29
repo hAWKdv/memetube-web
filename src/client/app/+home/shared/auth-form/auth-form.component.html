@@ -1,5 +1,5 @@
 <section>
-  <form class="login-form">
+  <form *ngIf="isLogin" class="login-form">
     <p>
       Login from here yo ..
     </p>
@@ -12,9 +12,12 @@
     <p>
       <button>Login</button>
     </p>
-    <p><a href="">.. or register</a></p>
+    <p><a href="#" (click)="switchForms()">.. or register</a></p>
   </form>
-  <form class="register-form">
+  <form *ngIf="!isLogin" class="register-form">
+    <p>
+      <a href="#" (click)="switchForms()">go back to login</a>
+    </p>
     <p>
       <input type="text" placeholder="Username" />
     </p>

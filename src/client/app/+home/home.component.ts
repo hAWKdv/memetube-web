@@ -19,11 +19,18 @@ import { UploaderComponent } from './shared/uploader/index';
   ]
 })
 export class HomeComponent implements OnInit {
+  public showAuthForm: boolean;
+
   constructor(private _route: ActivatedRoute) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this._route.params.subscribe((params: any) => {
       console.log('cat', params['category']);
     });
+  }
+
+  public toggleAuthForm(): void {
+    console.log('toogle');
+    this.showAuthForm = !this.showAuthForm;
   }
 }
