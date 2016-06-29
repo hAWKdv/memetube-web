@@ -5,8 +5,8 @@ import * as Immutable from 'immutable';
 
 const app = Immutable.Record({
   user: null,
-  categories: Immutable.List([]),
-  memes: Immutable.List([])
+  categories: Immutable.List<Category>([]),
+  memes: Immutable.List<Meme>([])
 });
 
 export interface IApp {
