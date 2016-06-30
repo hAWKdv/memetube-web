@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import * as Immutable from 'immutable';
 
 import { Category } from '../store/category';
 
@@ -16,6 +17,9 @@ export class CategoryModel {
   }
 
   public getCategoryByName(name: string) {
-    return this.category$.find((category: Category) => category.name === name);
+    return this.category$
+      .map((categories: Immutable.List<Category>) => {
+        return categories.find((category: Category) => category.name === name);
+      });
   }
 }

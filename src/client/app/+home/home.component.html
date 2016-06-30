@@ -1,7 +1,12 @@
 <header>
   <div class="logo"></div>
   <div class="categories">
-    <a *ngFor="let cat of categories$ | async" href="">{{ cat.name }}</a>
+    <a [routerLink]="['/']">Home</a>
+    <a
+      *ngFor="let cat of categories$ | async"
+      [routerLink]="['/category', cat.name]">
+      {{ cat.name }}
+    </a>
   </div>
   <div class="menu">
     <div (click)="toggleUploader()" class="upload btn"></div>
@@ -11,9 +16,5 @@
   </div>
 </header>
 <section>
-  <mt-meme></mt-meme>
-  <mt-meme></mt-meme>
-  <mt-meme></mt-meme>
-  <mt-meme></mt-meme>
-  <mt-meme></mt-meme>
+  <mt-meme *ngFor="let meme of memes$ | async" [meme]="meme"></mt-meme>
 </section>

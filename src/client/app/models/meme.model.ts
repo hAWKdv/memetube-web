@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import * as Immutable from 'immutable';
 
 import { CategoryModel } from './category.model';
 import { Category } from '../store/category';
@@ -19,9 +20,11 @@ export class MemeModel {
 
   public getMemesByCategory(categoryName: string) {
     return this._categoryModel.getCategoryByName(categoryName)
-      .map((category: Category) => {
+      .flatMap((category: Category) => {
         return this.getMemes()
-          .filter((meme: Meme) => meme.categoryId === category.id);
+          .map((memes: Immutable.List<Meme>) => {
+            return memes.filter((meme: Meme) => meme.categoryId === category.id);
+          });
       });
   }
 }

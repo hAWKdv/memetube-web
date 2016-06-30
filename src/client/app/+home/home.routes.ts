@@ -6,7 +6,7 @@ export const HomeRoutes: RouterConfig = [
     path: '',
     component: HomeComponent
   }, {
-    path: ':category',
+    path: 'category/:category',
     component: HomeComponent
   }
 ];

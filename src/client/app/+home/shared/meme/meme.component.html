@@ -1,6 +1,6 @@
-<h2>Somekind of a title</h2>
+<h2>{{ meme.title }}</h2>
 <div class="master">
-  <img width="600" src="http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg" />
+  <img width="600" src="{{ meme.image }}" />
   <div class="voting">
     <div class="up" (click)="upvote()"></div>
     <div class="down" (click)="downvote()"></div>
