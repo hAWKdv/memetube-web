@@ -9,6 +9,8 @@ import { Category } from '../store/category';
 import { Meme } from '../store/meme';
 import { MemeActions } from '../actions/meme.actions';
 
+const DEFAULT_API: string = Config.API + '/memes';
+
 @Injectable()
 export class MemeModel {
   public meme$: any;
@@ -23,7 +25,7 @@ export class MemeModel {
 
   public loadMemes() {
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.get(Config.API)
+      this._authHttp.get(DEFAULT_API)
         .subscribe((data: any) => {
           // map
           console.log(data);
@@ -47,17 +49,24 @@ export class MemeModel {
       });
   }
 
+  public addMeme(meme: Meme) {
+    // this._authHttp.post(DEFAULT_API, null)
+    //   .subscribe(() => {
+        this._store.dispatch(MemeActions.addMeme(meme));
+      // });
+  }
+
   public upvoteMeme(meme: Meme) {
-    this._authHttp.post(`${Config.API}/${meme.id}/upvote`, null)
+    this._authHttp.post(`${DEFAULT_API}/${meme.id}/upvote`, null)
       .subscribe(() => {
-        MemeActions.upvoteMeme(meme.id);
+        this._store.dispatch(MemeActions.upvoteMeme(meme.id));
       });
   }
 
   public downvoteMeme(meme: Meme) {
-    this._authHttp.post(`${Config.API}/${meme.id}/downvote`, null)
+    this._authHttp.post(`${DEFAULT_API}/${meme.id}/downvote`, null)
       .subscribe(() => {
-        MemeActions.downvoteMeme(meme.id);
+        this._store.dispatch(MemeActions.downvoteMeme(meme.id));
       });
   }
 }
