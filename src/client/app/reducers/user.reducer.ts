@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { initialState } from '../store/index';
 import { User } from '../store/user';
 
-import { CHANGE_USER } from '../actions/user.actions';
+import { CHANGE_USER, REMOVE_USER } from '../actions/user.actions';
 
 export const userReducer = (state: User = initialState.get('user'), action: Action) => {
   switch (action.type) {
@@ -10,8 +10,10 @@ export const userReducer = (state: User = initialState.get('user'), action: Acti
       state = action.payload;
       break;
 
-    default:
-	    break;
+    case REMOVE_USER:
+      // Not really convinient, but ..
+      state = new User({});
+      break;
 	}
 
   return state;

@@ -16,15 +16,20 @@ export class UserModel {
   }
 
   public login(username: string, password: string) {
-    return this._authorization('/login', username, password);
+    return this._authorization('login', username, password);
   }
 
   public register(username: string, password: string) {
-    return this._authorization('/auth', username, password);
+    return this._authorization('auth', username, password);
   }
 
   public changeUser(user: User) {
     const action: Action = UserActions.changeUser(user);
+    this._store.dispatch(action);
+  }
+
+  public removeUser() {
+    const action: Action = UserActions.removeUser();
     this._store.dispatch(action);
   }
 

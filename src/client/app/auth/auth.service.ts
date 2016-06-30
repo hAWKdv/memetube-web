@@ -21,6 +21,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this._userModel.removeUser();
     Storage.remove(Config.AUTH_USERNAME);
     Storage.remove(Config.AUTH_TOKEN);
   }

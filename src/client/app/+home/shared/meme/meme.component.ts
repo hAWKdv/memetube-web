@@ -20,12 +20,24 @@ export class MemeComponent {
     return this._auth.isLogged();
   }
 
+  public get didVoted(): boolean {
+    return this.meme.voted !== 0;
+  }
+
   public upvote(): void {
+    if (this.didVoted) {
+      return;
+    }
+
     this._memeModel.upvoteMeme(this.meme)
       .then(null, () => alert('Something went wrong with upvoting ..'));
   }
 
   public downvote(): void {
+    if (this.didVoted) {
+      return;
+    }
+
     this._memeModel.downvoteMeme(this.meme)
       .then(null, () => alert('Something went wrong with downvoting ..'));
   }

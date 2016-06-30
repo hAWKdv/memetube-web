@@ -2,19 +2,18 @@
   <form #form="ngForm" (ngSubmit)="upload()">
     <p>Show us what you got ..</p>
     <p>
-      <input [(ngModel)]="title" name="title" type="text" placeholder="Pick a title for your meme" />
+      <input [(ngModel)]="title" name="title" type="text" placeholder="Pick a title for your meme" required />
     </p>
     <p>
-      <input type="file" (change)="onImageChange($event)" />
+      <input type="file" (change)="onImageChange($event)" required />
     </p>
     <p>
-      <select [(ngModel)]="category" name="category">
+      <select [(ngModel)]="category" name="category" placeholder="Select a category" required>
         <option *ngFor="let cat of categories$ | async" value="{{cat.id}}">{{cat.name}}</option>
       </select>
     </p>
     <p>
-      <button>Upload</button>
+      <button [disabled]="!form.form.valid">Upload</button>
     </p>
   </form>
-  <div class="fuck"></div>
 </section>

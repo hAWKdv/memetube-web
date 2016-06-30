@@ -2,9 +2,23 @@
 <div class="master">
   <img width="600" src="{{ meme.image }}" />
   <div class="voting">
-    <div class="ups-count">{{ meme.ups }}</div>
-    <div *ngIf="isLogged" class="up" (click)="upvote()"></div>
-    <div *ngIf="isLogged" class="down" (click)="downvote()"></div>
-    <div class="downs-count">{{ meme.downs }}</div>
+    <div class="ups-count" title="Upvotes">{{ meme.ups }}</div>
+    <div
+      *ngIf="isLogged"
+      [class.vote-picked]="meme.voted === 1"
+      [class.vote-unpicked]="meme.voted === -1"
+      class="up btn"
+      (click)="upvote()">
+      UP
+    </div>
+    <div
+      *ngIf="isLogged"
+      [class.vote-picked]="meme.voted === -1"
+      [class.vote-unpicked]="meme.voted === 1"
+      class="down btn"
+      (click)="downvote()">
+      DW
+    </div>
+    <div class="downs-count" title="Downvotes">{{ meme.downs }}</div>
   </div>
 </div>

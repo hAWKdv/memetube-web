@@ -5,9 +5,66 @@ html, body, div, p {
 }
 
 body {
-  background: #ffecef;
+  background: #fff;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+  border-bottom: 2px dotted #000;
+  cursor: pointer;
+}
+
+a:hover {
+  border-bottom-style: solid;
+}
+
+input, button, select {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 7px 12px;
+  font-size: 16px;
+  border: none;
+}
+
+input, select {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  transition: border-bottom 0.2s ease;
+}
+
+input:hover, select:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.7);
+}
+
+input:focus, select:focus {
+  border-bottom-color: #000;
+  outline: none;
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background 0.2s ease;
+  background: #555;
+  border-radius: 2px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+button:hover {
+  background: #000;
+}
+
+button:disabled {
+  color: #000;
+  background: none;
+  border: 2px dotted #000;
 }

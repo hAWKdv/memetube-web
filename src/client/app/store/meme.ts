@@ -7,7 +7,8 @@ const meme = Immutable.Record({
   categoryId: -1,
   voted: 0,
   ups: 0,
-  downs: 0
+  downs: 0,
+  userId: -1
 });
 
 export interface IMeme {
@@ -18,6 +19,7 @@ export interface IMeme {
   voted?: number;
   ups?: number;
   downs?: number;
+  userId?: number;
 }
 
 export class Meme extends meme implements IMeme {
@@ -28,6 +30,7 @@ export class Meme extends meme implements IMeme {
   voted: number;
   ups: number;
   downs: number;
+  userId: number;
 
   constructor(config: IMeme) {
     super(config);

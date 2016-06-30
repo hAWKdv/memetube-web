@@ -9,10 +9,15 @@ header {
 }
 
 .logo {
-  background: black;
-  width: 75px;
+  border: 2px dotted black;
+  padding: 6px 15px;
   height: 35px;
   float: left;
+  box-sizing: border-box;
+}
+
+.categories, .menu {
+  margin-top: 6px;
 }
 
 .menu {
@@ -30,38 +35,44 @@ p.name {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 900px;
+  width: 800px;
   text-align: center;
 }
 
-.btn {
+.category {
+  margin-right: 15px;
+}
+
+.menu > a {
+  transition: 0.2 ease;
+}
+
+.menu > a, .menu > span {
   margin-left: 15px;
-  width: 35px;
-  height: 35px;
-  float: left;
-  cursor: pointer;
 }
 
-.login.btn {
-  background: green;
+.login:hover {
+  color: mediumseagreen;
+  border-bottom-color: mediumaquamarine;
 }
 
-.upload.btn {
-  background: blue;
+.upload:hover {
+  color: rebeccapurple;
+  border-bottom-color: rebeccapurple;
 }
 
-.logout.btn {
-  background: red;
+.logout:hover {
+  color: crimson;
+  border-bottom-color: crimson;
 }
 
 section {
   position: absolute;
-  border: 1px solid black;
   transform: translateX(-50%);
   left: 50%;
   bottom: 0;
   top: 75px;
-  width: 900px;
+  width: 800px;
   overflow-y: scroll;
   overflow-x: none;
 }
@@ -74,15 +85,23 @@ mt-auth-form, mt-uploader {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 40px;
-  display: none;
+  margin-top: 35px;
+  transition: height 0.3s ease;
+  display: block;
+  height: 0;
+  overflow: hidden;
 }
 
 .show {
-  display: block;
+  height: 500px;
 }
 
 mt-meme {
   display: block;
   margin-bottom: 40px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 500;
 }

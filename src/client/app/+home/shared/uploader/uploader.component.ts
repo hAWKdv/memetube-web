@@ -33,6 +33,11 @@ export class UploaderComponent {
   }
 
   public upload(): void {
+    if (!this.image) {
+      alert('Please, pick an image m8 ..');
+      return;
+    }
+
     const meme = new Meme({
       title: this.title,
       categoryId: parseInt(this.category),

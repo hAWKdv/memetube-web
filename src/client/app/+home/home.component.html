@@ -1,22 +1,23 @@
 <header>
-  <div class="logo"></div>
+  <div class="logo">MEME_TUBE</div>
   <div class="categories">
-    <a [routerLink]="['/']">Home</a>
-    <a
-      *ngFor="let cat of categories$ | async"
-      [routerLink]="['/category', cat.name]">
-      {{ cat.name }}
+    <a class="category" [routerLink]="['/']">/Home</a>
+    <a *ngFor="let cat of categories$ | async"
+      class="category"
+      [routerLink]="['/', cat.name]">
+      /{{ cat.name }}
     </a>
   </div>
   <div class="menu">
-    <p class="name">{{ (user$ | async).username }}</p>
-    <div *ngIf="isLogged" (click)="toggleUploader()" class="upload btn"></div>
-    <div *ngIf="!isLogged" (click)="toggleAuthForm()" class="login btn"></div>
-    <div *ngIf="isLogged" (click)="logout()" class="logout btn"></div>
+    <span>{{ (user$ | async).username }}</span>
+    <a *ngIf="isLogged" (click)="toggleUploader()" class="upload">UPLOAD</a>
+    <a *ngIf="!isLogged" (click)="toggleAuthForm()" class="login">LOGIN</a>
+    <a *ngIf="isLogged" (click)="logout()" class="logout">LOGOUT</a>
     <mt-uploader *ngIf="isLogged" [class.show]="showUploader"></mt-uploader>
     <mt-auth-form *ngIf="!isLogged" [class.show]="showAuthForm"></mt-auth-form>
   </div>
 </header>
 <section>
+  <h2 *ngIf="(memes$ | async).count() === 0">No memes here. Go back.</h2>
   <mt-meme *ngFor="let meme of memes$ | async" [meme]="meme"></mt-meme>
 </section>

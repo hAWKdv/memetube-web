@@ -3,14 +3,14 @@
     <p>Login from here yo ..</p>
     <p><input [(ngModel)]="username" name="username" type="text" placeholder="Username" required /></p>
     <p><input [(ngModel)]="password" name="password" type="password" placeholder="Password" required /></p>
-    <p><button>Login</button></p>
+    <p><button [disabled]="!regForm.form.valid">Login</button></p>
     <p><a href="#" (click)="switchForms()">.. or register</a></p>
   </form>
   <form *ngIf="!isLogin" #logForm="ngForm" (ngSubmit)="register()" class="register-form">
     <p><a href="#" (click)="switchForms()">go back to login</a></p>
     <p><input [(ngModel)]="username" name="username" type="text" placeholder="Username" required /></p>
     <p><input [(ngModel)]="password" name="password" type="password" placeholder="Password" required /></p>
-    <p><input [(ngModel)]="confPassword" type="confPassword" placeholder="Confirm Password" required /></p>
-    <p><button>Register</button></p>
+    <p><input [(ngModel)]="confPassword" name="confPassword" type="password" placeholder="Confirm Password" required /></p>
+    <p><button [disabled]="!logForm.form.valid">Register</button></p>
   </form>
 </section>

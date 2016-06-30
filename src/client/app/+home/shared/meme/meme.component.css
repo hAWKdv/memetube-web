@@ -1,5 +1,10 @@
+:host {
+  border-bottom: 2px dotted #CCC;
+}
+
 .master {
   overflow: hidden;
+  margin-bottom: 35px;
 }
 
 img {
@@ -9,23 +14,63 @@ img {
 }
 
 .voting {
-  width: 30px;
   margin-left: 25px;
   float: left;
-
 }
 
-.voting > div {
-  width: 20px;
-  height: 30px;
-  margin-bottom: 10px;
+.ups-count, .downs-count {
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.ups-count {
+  color: #4cc35a;
+  margin-bottom: 5px;
+}
+
+.downs-count {
+  color: #e7445d;
+  margin-top: 5px;
+}
+
+.btn {
+  transition: background 0.3s ease;
+  padding: 2px 8px;
+  margin: 10px;
   cursor: pointer;
+  color: #fff;
+}
+
+.btn.vote-picked {
+  background: #999 !important;
+  cursor: default !important;
+}
+
+.btn.vote-unpicked {
+  background: #CCC !important;
+  cursor: default !important;
+}
+
+.btn:hover {
+  animation: enlarge 0.6s infinite;
+}
+
+.btn.vote-picked:hover,
+.btn.vote-unpicked:hover {
+  animation: none;
 }
 
 .up {
-  background: green;
+  background: #4cc35a;
 }
 
 .down {
-  background: red;
+  background: #e7445d;
+}
+
+@keyframes enlarge {
+  50% {
+    transform: scale(1.2);
+  }
 }
