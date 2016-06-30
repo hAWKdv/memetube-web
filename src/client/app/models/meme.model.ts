@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, Action } from '@ngrx/store';
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Config } from '../config/config';
+import { AuthService } from '../auth/auth.service';
 import * as Immutable from 'immutable';
 
 import { CategoryModel } from './category.model';
@@ -9,7 +10,7 @@ import { Category } from '../store/category';
 import { Meme } from '../store/meme';
 import { MemeActions } from '../actions/meme.actions';
 
-const DEFAULT_API: string = Config.API + '/memes';
+const DEFAULT_API: string = Config.API + '/api/memes';
 
 @Injectable()
 export class MemeModel {
@@ -18,16 +19,18 @@ export class MemeModel {
   constructor(
     private _store: Store<any>,
     private _categoryModel: CategoryModel,
-    private _authHttp: AuthHttp
+    private _authHttp: AuthHttp,
+    private _auth: AuthService
   ) {
     this.meme$ = _store.select('memes');
   }
 
   public loadMemes(page: number = 1, pageSize: number = 10, categoryId?: number) {
     const category: string = categoryId > 0 ? `&category_id=${categoryId}` : '';
+    const api: string = this._auth.isLogged() ? DEFAULT_API : Config.API + '/memes';
 
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.get(`${DEFAULT_API}?page=${page}&page_size=${pageSize}${category}`)
+      this._authHttp.get(`?page=${page}&page_size=${pageSize}${category}`)
         .subscribe((data: any) => {
           const mapped: Immutable.List<Meme> = Immutable.List<Meme>(
             data.map((m: any) => new Meme({
@@ -36,8 +39,7 @@ export class MemeModel {
               categoryId: m.category,
               ups: m.ups,
               downs: m.downs,
-              voted: m.voted,
-              userId: m.user
+              voted: m.voted ? 0 : m.voted,
             }))
           );
 

@@ -43,6 +43,10 @@ p.name {
   margin-right: 15px;
 }
 
+@keyframes enlarge {
+  50% { transform: scale(1.1); }
+}
+
 .menu > a, .menu > span {
   margin-left: 15px;
 }
