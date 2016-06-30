@@ -1,34 +1,16 @@
 <section>
-  <form *ngIf="isLogin" class="login-form">
-    <p>
-      Login from here yo ..
-    </p>
-    <p>
-      <input type="text" placeholder="Username" />
-    </p>
-    <p>
-      <input type="password" placeholder="Password" />
-    </p>
-    <p>
-      <button>Login</button>
-    </p>
+  <form *ngIf="isLogin" #regForm="ngForm" (ngSubmit)="login()" class="login-form">
+    <p>Login from here yo ..</p>
+    <p><input [(ngModel)]="username" name="username" type="text" placeholder="Username" required /></p>
+    <p><input [(ngModel)]="password" name="password" type="password" placeholder="Password" required /></p>
+    <p><button>Login</button></p>
     <p><a href="#" (click)="switchForms()">.. or register</a></p>
   </form>
-  <form *ngIf="!isLogin" class="register-form">
-    <p>
-      <a href="#" (click)="switchForms()">go back to login</a>
-    </p>
-    <p>
-      <input type="text" placeholder="Username" />
-    </p>
-    <p>
-      <input type="password" placeholder="Password" />
-    </p>
-    <p>
-      <input type="password" placeholder="Confirm Password" />
-    </p>
-    <p>
-      <button>Register</button>
-    </p>
+  <form *ngIf="!isLogin" #logForm="ngForm" (ngSubmit)="register()" class="register-form">
+    <p><a href="#" (click)="switchForms()">go back to login</a></p>
+    <p><input [(ngModel)]="username" name="username" type="text" placeholder="Username" required /></p>
+    <p><input [(ngModel)]="password" name="password" type="password" placeholder="Password" required /></p>
+    <p><input [(ngModel)]="confPassword" type="confPassword" placeholder="Confirm Password" required /></p>
+    <p><button>Register</button></p>
   </form>
 </section>

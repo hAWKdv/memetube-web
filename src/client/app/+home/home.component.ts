@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
+import { UserModel } from '../models/user.model';
 import { CategoryModel } from '../models/category.model';
 import { MemeModel } from '../models/meme.model';
 
@@ -14,6 +16,7 @@ import { UploaderComponent } from './shared/uploader/index';
   moduleId: module.id,
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
+  providers: [AuthService],
   directives: [
     REACTIVE_FORM_DIRECTIVES,
     ROUTER_DIRECTIVES,
@@ -28,9 +31,19 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _auth: AuthService,
+    private _userModel: UserModel,
     private _categoryModel: CategoryModel,
     private _memeModel: MemeModel
   ) {}
+
+  public get isLogged(): boolean {
+    return this._auth.isLogged();
+  }
+
+  public get user$() {
+    return this._userModel.getUser();
+  }
 
   public get categories$() {
     return this._categoryModel.getCategories();
@@ -60,5 +73,9 @@ export class HomeComponent implements OnInit {
   public toggleUploader(): void {
     this.showAuthForm = false;
     this.showUploader = !this.showUploader;
+  }
+
+  public logout(): void {
+    this._auth.logout();
   }
 }

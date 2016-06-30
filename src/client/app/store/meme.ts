@@ -6,8 +6,8 @@ const meme = Immutable.Record({
   title: null,
   categoryId: -1,
   voted: 0,
-  ups: -1,
-  downs: -1
+  ups: 0,
+  downs: 0
 });
 
 export interface IMeme {

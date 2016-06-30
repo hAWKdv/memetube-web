@@ -39,6 +39,10 @@ export class UploaderComponent {
       image: this.image
     });
 
-    this._memeModel.addMeme(meme);
+    this._memeModel.addMeme(meme)
+      .then(
+        () => alert(`"${meme.title}" has been uploaded! Great success!`),
+        () => alert('Something went wrong ..')
+      );
   }
 }

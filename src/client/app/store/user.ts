@@ -15,6 +15,6 @@ export class User extends user implements IUser {
   username: string;
 
   constructor(config: IUser) {
-    super();
+    super(config);
   }
 }

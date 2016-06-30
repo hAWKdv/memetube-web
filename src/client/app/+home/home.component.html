@@ -9,10 +9,12 @@
     </a>
   </div>
   <div class="menu">
-    <div (click)="toggleUploader()" class="upload btn"></div>
-    <div (click)="toggleAuthForm()" class="login btn"></div>
-    <mt-uploader [class.show]="showUploader"></mt-uploader>
-    <mt-auth-form [class.show]="showAuthForm"></mt-auth-form>
+    <p class="name">{{ (user$ | async).username }}</p>
+    <div *ngIf="isLogged" (click)="toggleUploader()" class="upload btn"></div>
+    <div *ngIf="!isLogged" (click)="toggleAuthForm()" class="login btn"></div>
+    <div *ngIf="isLogged" (click)="logout()" class="logout btn"></div>
+    <mt-uploader *ngIf="isLogged" [class.show]="showUploader"></mt-uploader>
+    <mt-auth-form *ngIf="!isLogged" [class.show]="showAuthForm"></mt-auth-form>
   </div>
 </header>
 <section>

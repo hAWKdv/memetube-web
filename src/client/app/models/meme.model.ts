@@ -50,10 +50,16 @@ export class MemeModel {
   }
 
   public addMeme(meme: Meme) {
-    // this._authHttp.post(DEFAULT_API, null)
-    //   .subscribe(() => {
-        this._store.dispatch(MemeActions.addMeme(meme));
-      // });
+    return new Promise((resolve: any, reject: any) => {
+      this._authHttp.post(DEFAULT_API, null)
+        .subscribe((data: any) => {
+          const m = meme.set('id', data.id);
+          const action = MemeActions.addMeme(<Meme>m);
+
+          this._store.dispatch(action);
+          resolve(m);
+        }, (err: any) => reject(err));
+    });
   }
 
   public upvoteMeme(meme: Meme) {

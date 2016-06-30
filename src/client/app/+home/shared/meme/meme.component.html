@@ -2,7 +2,7 @@
 <div class="master">
   <img width="600" src="{{ meme.image }}" />
   <div class="voting">
-    <div class="up" (click)="upvote()"></div>
-    <div class="down" (click)="downvote()"></div>
+    <div *ngIf="isLogged" class="up" (click)="upvote()"></div>
+    <div *ngIf="isLogged" class="down" (click)="downvote()"></div>
   </div>
 </div>
