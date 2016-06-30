@@ -1,9 +1,7 @@
 <header>
   <div class="logo"></div>
   <div class="categories">
-    <a href="">Cat 1</a>
-    <a href="">Cat 2</a>
-    <a href="">Cat 3</a>
+    <a *ngFor="let cat of categories$ | async" href="">{{ cat.name }}</a>
   </div>
   <div class="menu">
     <div (click)="toggleUploader()" class="upload btn"></div>

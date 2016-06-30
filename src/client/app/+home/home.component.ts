@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { CategoryModel } from '../models/category.model';
+
 import { AuthFormComponent } from './shared/auth-form/index';
 import { MemeComponent } from './shared/meme/index';
 import { UploaderComponent } from './shared/uploader/index';
@@ -22,7 +24,14 @@ export class HomeComponent implements OnInit {
   public showAuthForm: boolean;
   public showUploader: boolean;
 
-  constructor(private _route: ActivatedRoute) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _categoryModel: CategoryModel
+  ) {}
+
+  public get categories$() {
+    return this._categoryModel.getCategories();
+  }
 
   public ngOnInit(): void {
     this._route.params.subscribe((params: any) => {
