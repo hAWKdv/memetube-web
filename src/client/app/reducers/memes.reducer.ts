@@ -2,14 +2,16 @@ import { Action } from '@ngrx/store';
 import { initialState } from '../store/index';
 import { Meme } from '../store/meme';
 
-import {
-  ADD_MEME, UPVOTE_MEME, DOWNVOTE_MEME
-} from '../actions/meme.actions';
+import { ADD_MEME, ADD_MEMES, UPVOTE_MEME, DOWNVOTE_MEME } from '../actions/meme.actions';
 
 export const memesReducer = (state = initialState.get('memes'), action: Action) => {
   switch (action.type) {
     case ADD_MEME:
       state = state.push(action.payload);
+      break;
+
+    case ADD_MEMES:
+      state = state.concat(action.payload);
       break;
 
     case UPVOTE_MEME: {

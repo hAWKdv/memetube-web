@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import * as Immutable from 'immutable';
 
 import { UserModel } from '../models/user.model';
 import { CategoryModel } from '../models/category.model';
 import { MemeModel } from '../models/meme.model';
+
+import { Category } from '../store/category';
 
 import { AuthFormComponent } from './shared/auth-form/index';
 import { MemeComponent } from './shared/meme/index';
@@ -62,7 +65,19 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    //this._memeModel.loadMemes();
+    // this._categoryModel.loadCategories()
+    //   .then((categories: Immutable.List<Category>) => {
+    //     this._route.params
+    //       .subscribe((params: any) => {
+    //         const cat: string = params['category'];
+    //         const catId: number = categories.find((c: Category) => c.name === cat).id;
+
+    //         this._memeModel.loadMemes(1, 1, catId)
+    //           .then(() => {
+    //             console.log('great success');
+    //           }, () => alert('Sad :('));
+    //       });
+    //   });
   }
 
   public toggleAuthForm(): void {

@@ -14,6 +14,7 @@ export const initialState = new App({
   ]),
   memes: Immutable.List<Meme>([
     new Meme({
+      id: 1,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'Hot 1',
       categoryId: 1,
@@ -22,6 +23,7 @@ export const initialState = new App({
       downs: 10
     }),
     new Meme({
+      id: 2,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'Hot 2',
       categoryId: 1,
@@ -30,6 +32,7 @@ export const initialState = new App({
       downs: 11
     }),
     new Meme({
+      id: 3,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'Trending 1',
       categoryId: 2,
@@ -38,6 +41,7 @@ export const initialState = new App({
       downs: 15
     }),
     new Meme({
+      id: 4,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'Trending 2',
       categoryId: 2,
@@ -46,6 +50,7 @@ export const initialState = new App({
       downs: 10
     }),
     new Meme({
+      id: 5,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'NSFW 1',
       categoryId: 3,
@@ -54,6 +59,7 @@ export const initialState = new App({
       downs: 0
     }),
     new Meme({
+      id: 6,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'NSFW 2',
       categoryId: 3,

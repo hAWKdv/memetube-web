@@ -7,6 +7,8 @@ import * as Immutable from 'immutable';
 import { Category } from '../store/category';
 import { CategoryActions } from '../actions/category.actions';
 
+const DEFAULT_API = `${Config.API}/categories`;
+
 @Injectable()
 export class CategoryModel {
   public category$: any;
@@ -17,7 +19,7 @@ export class CategoryModel {
 
   public loadCategories() {
     return new Promise((resolve: any, reject: any) => {
-      this._http.get(Config.API)
+      this._http.get(DEFAULT_API)
         .subscribe((data: any) => {
           const mapped = Immutable.List<Category>(
             data.map((cat: any) => new Category({ id: cat.id, name: cat.name }))
