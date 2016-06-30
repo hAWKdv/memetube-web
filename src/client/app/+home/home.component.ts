@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, ViewChild, Renderer, ElementRef, OnInit, AfterViewInit
+} from '@angular/core';
+
+
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
@@ -28,7 +32,9 @@ import { UploaderComponent } from './shared/uploader/index';
     UploaderComponent
   ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild('memeContainer') memeContainer: ElementRef;
+
   public showAuthForm: boolean;
   public showUploader: boolean;
 
@@ -37,7 +43,8 @@ export class HomeComponent implements OnInit {
     private _auth: AuthService,
     private _userModel: UserModel,
     private _categoryModel: CategoryModel,
-    private _memeModel: MemeModel
+    private _memeModel: MemeModel,
+    private _renderer: Renderer
   ) {}
 
   public get isLogged(): boolean {
@@ -80,6 +87,13 @@ export class HomeComponent implements OnInit {
     //   });
   }
 
+  public ngAfterViewInit(): void {
+    this._renderer
+      .listen(this.memeContainer.nativeElement, 'scroll', (event: any) => {
+        // console.log('a', event);
+      });
+  }
+
   public toggleAuthForm(): void {
     this.showUploader = false;
     this.showAuthForm = !this.showAuthForm;
@@ -92,5 +106,6 @@ export class HomeComponent implements OnInit {
 
   public logout(): void {
     this._auth.logout();
+    alert('You logged out.');
   }
 }

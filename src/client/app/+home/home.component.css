@@ -43,10 +43,6 @@ p.name {
   margin-right: 15px;
 }
 
-.menu > a {
-  transition: 0.2 ease;
-}
-
 .menu > a, .menu > span {
   margin-left: 15px;
 }

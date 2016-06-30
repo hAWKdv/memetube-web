@@ -17,7 +17,7 @@
     <mt-auth-form *ngIf="!isLogged" [class.show]="showAuthForm"></mt-auth-form>
   </div>
 </header>
-<section>
+<section #memeContainer>
   <h2 *ngIf="(memes$ | async).count() === 0">No memes here. Go back.</h2>
   <mt-meme *ngFor="let meme of memes$ | async" [meme]="meme"></mt-meme>
 </section>

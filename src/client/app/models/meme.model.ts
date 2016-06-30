@@ -36,7 +36,8 @@ export class MemeModel {
               categoryId: m.category,
               ups: m.ups,
               downs: m.downs,
-              voted: m.voted
+              voted: m.voted,
+              userId: m.user
             }))
           );
 
