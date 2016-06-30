@@ -7,10 +7,11 @@ import * as Immutable from 'immutable';
 import { CategoryModel } from './category.model';
 import { Category } from '../store/category';
 import { Meme } from '../store/meme';
+import { MemeActions } from '../actions/meme.actions';
 
 @Injectable()
 export class MemeModel {
-  meme$: any;
+  public meme$: any;
 
   constructor(
     private _store: Store<any>,
@@ -21,10 +22,15 @@ export class MemeModel {
   }
 
   public loadMemes() {
-    this._authHttp.get('http://localhost:3000/test')
-      .subscribe((data: any) => {
-        console.log(data);
-      });
+    return new Promise((resolve: any, reject: any) => {
+      this._authHttp.get(Config.API)
+        .subscribe((data: any) => {
+          // map
+          console.log(data);
+
+          resolve(data);
+        }, (err: any) => reject(err));
+    });
   }
 
   public getMemes() {
@@ -38,6 +44,20 @@ export class MemeModel {
           .map((memes: Immutable.List<Meme>) => {
             return memes.filter((meme: Meme) => meme.categoryId === category.id);
           });
+      });
+  }
+
+  public upvoteMeme(meme: Meme) {
+    this._authHttp.post(`${Config.API}/${meme.id}/upvote`, null)
+      .subscribe(() => {
+        MemeActions.upvoteMeme(meme.id);
+      });
+  }
+
+  public downvoteMeme(meme: Meme) {
+    this._authHttp.post(`${Config.API}/${meme.id}/downvote`, null)
+      .subscribe(() => {
+        MemeActions.downvoteMeme(meme.id);
       });
   }
 }

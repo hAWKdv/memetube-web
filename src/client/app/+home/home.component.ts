@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._memeModel.loadMemes();
+    //this._memeModel.loadMemes();
   }
 
   public toggleAuthForm(): void {

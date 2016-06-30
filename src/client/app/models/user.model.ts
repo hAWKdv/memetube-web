@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class UserModel {
-  user$: any;
+  public user$: any;
 
   constructor(private _store: Store<any>) {
     this.user$ = _store.select('user');

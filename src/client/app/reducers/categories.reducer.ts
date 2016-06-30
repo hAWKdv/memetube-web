@@ -1,13 +1,12 @@
 import { Action } from '@ngrx/store';
 import { initialState } from '../store/index';
-import { Category } from '../store/category';
-import * as Immutable from 'immutable';
 
-type Categories = Immutable.List<Category>;
+import { ADD_CATEGORIES } from '../actions/category.actions';
 
-export const categoriesReducer = (state: Categories = initialState.get('categories'), action: Action) => {
+export const categoriesReducer = (state = initialState.get('categories'), action: Action) => {
   switch (action.type) {
-    default:
+    case ADD_CATEGORIES:
+      state = state.concat(action.payload);
 	    break;
 	}
 
