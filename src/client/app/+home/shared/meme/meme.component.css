@@ -36,6 +36,7 @@ img {
 
 .btn {
   transition: background 0.3s ease;
+  text-align: center;
   padding: 2px 8px;
   margin: 10px;
   cursor: pointer;

@@ -30,7 +30,7 @@ export class MemeModel {
     const api: string = this._auth.isLogged() ? DEFAULT_API : Config.API + '/memes';
 
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.get(`?page=${page}&page_size=${pageSize}${category}`)
+      this._authHttp.get(`${api}?page=${page}&page_size=${pageSize}${category}`)
         .subscribe((data: any) => {
           const mapped: Immutable.List<Meme> = Immutable.List<Meme>(
             data.map((m: any) => new Meme({
@@ -53,6 +53,15 @@ export class MemeModel {
 
   public getMemes() {
     return this.meme$;
+  }
+
+  public getMemesCount(categoryId?: number) {
+    return this.meme$.map((memes: Immutable.List<Meme>) => {
+      if (categoryId) {
+        return memes.filter((m: Meme) => m.categoryId === categoryId).count();
+      }
+      return memes.count();
+    });
   }
 
   public getMemesByCategory(categoryName: string) {

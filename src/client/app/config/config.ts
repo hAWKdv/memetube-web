@@ -4,12 +4,14 @@ export interface IConfig {
   API: string;
   AUTH_TOKEN: string;
   AUTH_USERNAME: string;
+  MEME_FETCH_PORTION: number;
 }
 
 export const Config: IConfig = {
   API: 'http://localhost:3000',
   AUTH_TOKEN: 'mt-auth-token',
-  AUTH_USERNAME: 'mt-username'
+  AUTH_USERNAME: 'mt-username',
+  MEME_FETCH_PORTION: 5,
 };
 
 //export const Config: IConfig = JSON.parse('<%= ENV_CONFIG %>');

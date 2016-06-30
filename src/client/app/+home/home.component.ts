@@ -6,6 +6,7 @@ import {
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { Config } from '../config/config';
 import * as Immutable from 'immutable';
 
 import { UserModel } from '../models/user.model';
@@ -23,7 +24,6 @@ import { UploaderComponent } from './shared/uploader/index';
   moduleId: module.id,
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  providers: [AuthService],
   directives: [
     REACTIVE_FORM_DIRECTIVES,
     ROUTER_DIRECTIVES,
@@ -37,6 +37,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   public showAuthForm: boolean;
   public showUploader: boolean;
+  private _categoryId: number;
+  private _page: number;
+  private _allowRequest: boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -78,20 +81,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //       .subscribe((params: any) => {
     //         const cat: string = params['category'];
     //         const catId: number = categories.find((c: Category) => c.name === cat).id;
+    //         this._category = catId;
 
-    //         this._memeModel.loadMemes(1, 1, catId)
-    //           .then(() => {
-    //             console.log('great success');
-    //           }, () => alert('Sad :('));
+    //         this._memeModel.getMemesCount(catId)
+    //           .subscribe((count: number) => {
+    //             const calcCount: number = count === 1 ? 0 : count;
+    //             const pageCache: number = this._page;
+
+    //             this._page = Math.ceil(calcCount / Config.MEME_FETCH_PORTION) + 1;
+    //             this._allowRequest = pageCache === this._page ? false : true;
+
+    //             if (count < Config.MEME_FETCH_PORTION) {
+    //               this._loadMemes(catId);
+    //             }
+    //           });
     //       });
     //   });
   }
 
   public ngAfterViewInit(): void {
-    this._renderer
-      .listen(this.memeContainer.nativeElement, 'scroll', (event: any) => {
-        // console.log('a', event);
-      });
+    const cont = this.memeContainer.nativeElement;
+
+    this._renderer.listen(cont, 'scroll', (event: any) => {
+      if (cont.offsetHeight + cont.scrollTop >= cont.scrollHeight) {
+        this._loadMemes(this._categoryId);
+      }
+    });
   }
 
   public toggleAuthForm(): void {
@@ -107,5 +122,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public logout(): void {
     this._auth.logout();
     alert('You logged out.');
+  }
+
+  private _loadMemes(category?: number): void {
+    if (this._allowRequest) {
+      this._memeModel.loadMemes(this._page, Config.MEME_FETCH_PORTION, category);
+      this._allowRequest = false;
+    }
   }
 }

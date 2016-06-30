@@ -32,6 +32,15 @@ export const initialState = new App({
       downs: 11
     }),
     new Meme({
+      id: 7,
+      image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
+      title: 'Muto',
+      categoryId: 1,
+      voted: 0,
+      ups: 1,
+      downs: 2
+    }),
+    new Meme({
       id: 3,
       image: 'http://img-9gag-fun.9cache.com/photo/amz86z9_700b_v2.jpg',
       title: 'Trending 1',

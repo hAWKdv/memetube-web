@@ -5,6 +5,7 @@ import { AUTH_PROVIDERS, AuthConfig, AuthHttp } from 'angular2-jwt/angular2-jwt'
 import { provideStore } from '@ngrx/store';
 import { Config } from './config/config';
 import { Storage } from './utils/storage';
+import { AuthService } from './auth/auth.service';
 
 import { userReducer } from './reducers/user.reducer';
 import { memesReducer } from './reducers/memes.reducer';
@@ -34,6 +35,7 @@ import { CategoryModel } from './models/category.model';
         tokenGetter: () => Storage.get(Config.AUTH_TOKEN)
       })
     }),
+    AuthService,
     AuthHttp,
     UserModel,
     MemeModel,
