@@ -49,9 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this._route.params.subscribe((params: any) => {
-    //   console.log('cat', params['category']);
-    // });
+    this._memeModel.loadMemes();
   }
 
   public toggleAuthForm(): void {

@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, provide } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { AUTH_PROVIDERS, AuthConfig, AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { provideStore } from '@ngrx/store';
+import { Config } from './config/config';
+import { Storage } from './utils/storage';
 
 import { userReducer } from './reducers/user.reducer';
 import { memesReducer } from './reducers/memes.reducer';
@@ -14,15 +17,24 @@ import { CategoryModel } from './models/category.model';
 @Component({
   selector: 'sd-app',
   moduleId: module.id,
-  viewProviders: [HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
   directives: [ROUTER_DIRECTIVES],
   providers: [
+    HTTP_PROVIDERS,
+    AUTH_PROVIDERS,
     provideStore({
       user: userReducer,
       memes: memesReducer,
       categories: categoriesReducer
     }),
+    provide(AuthConfig, {
+      useValue: new AuthConfig({
+        noJwtError: 'No JWT',
+        tokenName: Config.AUTH_TOKEN,
+        tokenGetter: () => Storage.get(Config.AUTH_TOKEN)
+      })
+    }),
+    AuthHttp,
     UserModel,
     MemeModel,
     CategoryModel
