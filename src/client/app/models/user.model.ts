@@ -44,14 +44,13 @@ export class UserModel {
     return new Promise((resolve: any, reject: any) => {
       this._http.post(`${Config.API}/${endpoint}`, body, getJsonContentTypeHeader())
         .subscribe((data: any) => {
-          const user: User = new User({
-            username: username
-          });
-
+          const user: User = new User({ username });
           const action: Action = UserActions.changeUser(user);
+          const token: string = JSON.parse(data._body).token;
+
           this._store.dispatch(action);
 
-          Storage.set(Config.AUTH_TOKEN, data.token);
+          Storage.set(Config.AUTH_TOKEN, token);
           Storage.set(Config.AUTH_USERNAME, username);
 
           resolve(user);

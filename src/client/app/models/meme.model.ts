@@ -24,6 +24,39 @@ export class MemeModel {
     private _auth: AuthService
   ) {
     this.meme$ = _store.select('memes');
+    //this.loadMemesTmp();
+  }
+
+  public loadMemesTmp(page: number = 1, pageSize: number = 10, categoryId?: number) {
+    return new Promise((resolve: any, reject: any) => {
+      this._authHttp.get('http://localhost:5555/mock-data/memes.json')
+        .subscribe((data: any) => {
+          const p = page - 1;
+          const mocks: Immutable.List<Meme> = Immutable.List<Meme>(
+            JSON.parse(data._body).map((m: any) => new Meme({
+              title: m.title,
+              image: m.image,
+              categoryId: m.category,
+              ups: m.ups,
+              downs: m.downs,
+              voted: m.voted ? 0 : m.voted,
+            }))
+          );
+
+          console.log('request', page, pageSize, categoryId);
+
+          let filtered: any;
+          if (categoryId) {
+            filtered = mocks.filter((m: Meme) => m.categoryId === categoryId);
+          } else {
+            filtered = mocks;
+          }
+
+          const res = filtered.skip(p * pageSize).take(pageSize);
+          this._store.dispatch(MemeActions.addMemes(<any>res));
+          resolve(res);
+        }, (err: any) => reject(err));
+    });
   }
 
   public loadMemes(page: number = 1, pageSize: number = 10, categoryId?: number) {
@@ -87,7 +120,8 @@ export class MemeModel {
     return new Promise((resolve: any, reject: any) => {
       this._authHttp.post(DEFAULT_API, body, getJsonContentTypeHeader())
         .subscribe((data: any) => {
-          const m = meme.set('id', data.id);
+          const response = JSON.parse(data._body);
+          const m = meme.set('id', response.id);
           const action = MemeActions.addMeme(<Meme>m);
 
           this._store.dispatch(action);
