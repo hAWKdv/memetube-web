@@ -27,37 +27,38 @@ export class MemeModel {
     //this.loadMemesTmp();
   }
 
-  public loadMemesTmp(page: number = 1, pageSize: number = 10, categoryId?: number) {
-    return new Promise((resolve: any, reject: any) => {
-      this._authHttp.get('http://localhost:5555/mock-data/memes.json')
-        .subscribe((data: any) => {
-          const p = page - 1;
-          const mocks: Immutable.List<Meme> = Immutable.List<Meme>(
-            JSON.parse(data._body).map((m: any) => new Meme({
-              title: m.title,
-              image: m.image,
-              categoryId: m.category,
-              ups: m.ups,
-              downs: m.downs,
-              voted: m.voted ? 0 : m.voted,
-            }))
-          );
+  // Temp loadMemes mock
+  // public loadMemesTmp(page: number = 1, pageSize: number = 10, categoryId?: number) {
+  //   return new Promise((resolve: any, reject: any) => {
+  //     this._authHttp.get('http://localhost:5555/mock-data/memes.json')
+  //       .subscribe((data: any) => {
+  //         const p = page - 1;
+  //         const mocks: Immutable.List<Meme> = Immutable.List<Meme>(
+  //           JSON.parse(data._body).map((m: any) => new Meme({
+  //             title: m.title,
+  //             image: m.image,
+  //             categoryId: m.category,
+  //             ups: m.ups,
+  //             downs: m.downs,
+  //             voted: m.voted ? 0 : m.voted,
+  //           }))
+  //         );
 
-          console.log('request', page, pageSize, categoryId);
+  //         console.log('request', page, pageSize, categoryId);
 
-          let filtered: any;
-          if (categoryId) {
-            filtered = mocks.filter((m: Meme) => m.categoryId === categoryId);
-          } else {
-            filtered = mocks;
-          }
+  //         let filtered: any;
+  //         if (categoryId) {
+  //           filtered = mocks.filter((m: Meme) => m.categoryId === categoryId);
+  //         } else {
+  //           filtered = mocks;
+  //         }
 
-          const res = filtered.skip(p * pageSize).take(pageSize);
-          this._store.dispatch(MemeActions.addMemes(<any>res));
-          resolve(res);
-        }, (err: any) => reject(err));
-    });
-  }
+  //         const res = filtered.skip(p * pageSize).take(pageSize);
+  //         this._store.dispatch(MemeActions.addMemes(<any>res));
+  //         resolve(res);
+  //       }, (err: any) => reject(err));
+  //   });
+  // }
 
   public loadMemes(page: number = 1, pageSize: number = 10, categoryId?: number) {
     const category: string = categoryId > 0 ? `&category_id=${categoryId}` : '';
@@ -66,15 +67,14 @@ export class MemeModel {
     return new Promise((resolve: any, reject: any) => {
       this._authHttp.get(`${api}?page=${page}&page_size=${pageSize}${category}`, getJsonContentTypeHeader())
         .subscribe((data: any) => {
-          if (!data) { resolve(); }
-
           const mapped: Immutable.List<Meme> = Immutable.List<Meme>(
-            data.map((m: any) => new Meme({
+            JSON.parse(data._body).map((m: any) => new Meme({
+              id: m.id,
               title: m.title,
               image: m.image,
-              categoryId: m.category,
-              ups: m.ups,
-              downs: m.downs,
+              categoryId: m.categoryId,
+              ups: m.upvotes,
+              downs: m.downvotes,
               voted: m.voted ? 0 : m.voted,
             }))
           );

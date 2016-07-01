@@ -81,30 +81,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     //this._categoryModel.loadCategories()
       //.then((categories: Immutable.List<Category>) => {
-        //this.categories$.subscribe((categories: any) => {
+        this.categories$.subscribe((categories: any) => {
 
-        // this._route.params
-        //   .subscribe((params: any) => {
-        //     const cat: string = params['category'];
-        //     const catObj: Category = categories.find((c: Category) => c.name === cat);
-        //     const catId: number = catObj ? catObj.id : -1;
-        //     this._categoryId = catId;
+        this._route.params
+          .subscribe((params: any) => {
+            const cat: string = params['category'];
+            const catObj: Category = categories.find((c: Category) => c.name === cat);
+            const catId: number = catObj ? catObj.id : -1;
+            this._categoryId = catId;
 
-        //     this._memeModel.getMemesCount(catId)
-        //       .subscribe((count: number) => {
-        //         const calcCount: number = count === 1 ? 0 : count;
-        //         //const pageCache: number = this._page;
+            this._memeModel.getMemesCount(catId)
+              .subscribe((count: number) => {
+                const calcCount: number = count === 1 ? 0 : count;
+                const pageCache: number = this._page;
 
-        //         this._page = Math.ceil(calcCount / Config.MEME_FETCH_PORTION) + 1;
-        //         //this._allowRequest = pageCache === this._page ? false : true;
+                this._page = Math.ceil(calcCount / Config.MEME_FETCH_PORTION) + 1;
+                this._allowRequest = pageCache === this._page ? false : true;
 
-        //         if (count < Config.MEME_FETCH_PORTION) {
-        //           this._loadMemes(catId);
-        //         }
-        //       });
-        //   });
+                if (count < Config.MEME_FETCH_PORTION) {
+                  this._loadMemes(catId);
+                }
+              });
+          });
 
-        //   });
+          });
       //});
   }
 
@@ -134,9 +134,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private _loadMemes(category?: number): void {
-    //if (this._allowRequest) {
+    if (this._allowRequest) {
       this._memeModel.loadMemes(this._page, Config.MEME_FETCH_PORTION, category);
-      //this._allowRequest = false;
-    //}
+      this._allowRequest = false;
+    }
   }
 }
