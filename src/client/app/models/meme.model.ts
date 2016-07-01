@@ -3,6 +3,7 @@ import { Store, Action } from '@ngrx/store';
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Config } from '../config/config';
 import { AuthService } from '../auth/auth.service';
+import { getJsonContentTypeHeader } from '../utils/util';
 import * as Immutable from 'immutable';
 
 import { CategoryModel } from './category.model';
@@ -30,8 +31,10 @@ export class MemeModel {
     const api: string = this._auth.isLogged() ? DEFAULT_API : Config.API + '/memes';
 
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.get(`${api}?page=${page}&page_size=${pageSize}${category}`)
+      this._authHttp.get(`${api}?page=${page}&page_size=${pageSize}${category}`, getJsonContentTypeHeader())
         .subscribe((data: any) => {
+          if (!data) { resolve(); }
+
           const mapped: Immutable.List<Meme> = Immutable.List<Meme>(
             data.map((m: any) => new Meme({
               title: m.title,
@@ -75,8 +78,14 @@ export class MemeModel {
   }
 
   public addMeme(meme: Meme) {
+    const body: string = JSON.stringify({
+      title: meme.title,
+      image: meme.image,
+      categoryId: meme.categoryId
+    });
+
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.post(DEFAULT_API, null)
+      this._authHttp.post(DEFAULT_API, body, getJsonContentTypeHeader())
         .subscribe((data: any) => {
           const m = meme.set('id', data.id);
           const action = MemeActions.addMeme(<Meme>m);
@@ -89,7 +98,7 @@ export class MemeModel {
 
   public upvoteMeme(meme: Meme) {
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.post(`${DEFAULT_API}/${meme.id}/upvote`, null)
+      this._authHttp.post(`${DEFAULT_API}/${meme.id}/upvote`, null, getJsonContentTypeHeader())
         .subscribe(() => {
           this._store.dispatch(MemeActions.upvoteMeme(meme.id));
           resolve(meme.id);
@@ -99,7 +108,7 @@ export class MemeModel {
 
   public downvoteMeme(meme: Meme) {
     return new Promise((resolve: any, reject: any) => {
-      this._authHttp.post(`${DEFAULT_API}/${meme.id}/downvote`, null)
+      this._authHttp.post(`${DEFAULT_API}/${meme.id}/downvote`, null, getJsonContentTypeHeader())
         .subscribe(() => {
           this._store.dispatch(MemeActions.downvoteMeme(meme.id));
           resolve(meme.id);

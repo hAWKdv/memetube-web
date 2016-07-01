@@ -25,8 +25,9 @@ export class AuthFormComponent {
   }
 
   register(): void {
-    if (this.username !== this.password) {
+    if (this.password !== this.confPassword) {
       alert('The passwords are not the same!');
+      return;
     }
 
     this._userModel.register(this.username, this.password)

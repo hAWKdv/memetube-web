@@ -1,3 +1,5 @@
+import { RequestOptions, Headers } from '@angular/http';
+
 export const imageToBase64 = (file: any, callback: any) => {
   const reader = new FileReader();
 
@@ -10,4 +12,8 @@ export const imageToBase64 = (file: any, callback: any) => {
   };
 
   reader.readAsDataURL(file);
+};
+
+export const getJsonContentTypeHeader = () => {
+  return new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
 };

@@ -4,6 +4,7 @@
     <a class="category" [routerLink]="['/']">/Home</a>
     <a *ngFor="let cat of categories$ | async"
       class="category"
+      [class.current]="cat.name === (categoryPage$ | async)"
       [routerLink]="['/', cat.name]">
       /{{ cat.name }}
     </a>

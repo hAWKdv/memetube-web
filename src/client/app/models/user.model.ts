@@ -3,6 +3,7 @@ import { Store, Action } from '@ngrx/store';
 import { Http } from '@angular/http';
 import { Config } from '../config/config';
 import { Storage } from '../utils/storage';
+import { getJsonContentTypeHeader } from '../utils/util';
 
 import { User } from '../store/user';
 import { UserActions } from '../actions/user.actions';
@@ -38,8 +39,10 @@ export class UserModel {
   }
 
   private _authorization(endpoint: string, username: string, password: string) {
+    const body: string = JSON.stringify({ username, password });
+
     return new Promise((resolve: any, reject: any) => {
-      this._http.post(`${Config.API}/${endpoint}`, null)
+      this._http.post(`${Config.API}/${endpoint}`, body, getJsonContentTypeHeader())
         .subscribe((data: any) => {
           const user: User = new User({
             username: username
@@ -48,7 +51,7 @@ export class UserModel {
           const action: Action = UserActions.changeUser(user);
           this._store.dispatch(action);
 
-          Storage.set(Config.AUTH_TOKEN, data.jwt);
+          Storage.set(Config.AUTH_TOKEN, data.token);
           Storage.set(Config.AUTH_USERNAME, username);
 
           resolve(user);

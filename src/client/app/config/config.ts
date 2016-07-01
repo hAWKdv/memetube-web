@@ -8,7 +8,7 @@ export interface IConfig {
 }
 
 export const Config: IConfig = {
-  API: 'http://localhost:3000',
+  API: 'http://192.168.0.103:8080',
   AUTH_TOKEN: 'mt-auth-token',
   AUTH_USERNAME: 'mt-username',
   MEME_FETCH_PORTION: 5,

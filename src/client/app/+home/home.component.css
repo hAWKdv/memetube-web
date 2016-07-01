@@ -43,8 +43,12 @@ p.name {
   margin-right: 15px;
 }
 
-@keyframes enlarge {
-  50% { transform: scale(1.1); }
+.category.current::before {
+  content: "[ ";
+}
+
+.category.current::after {
+  content: " ]";
 }
 
 .menu > a, .menu > span {
